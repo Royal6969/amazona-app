@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import data from '../../data'
 import Rating from '../Rating';
 //import Product from '../Product'
-me he quedado por el minuto 1:40:15
+
 export default function ProductScreen(props) {
     const product = data.products.find((x) => x._id === props.match.params.id);
     if(!product){
