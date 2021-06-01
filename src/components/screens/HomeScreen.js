@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Product from '../../components/Product';
-import data from '../../data';
+//import data from '../../data';
 import LoadingBox from '../LoadingBox';
 import MessageBox from '../MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ export default function HomeScreen() {
 
     useEffect(() => {
         dispatch(listProducts());
-    }, []);
+    }, [dispatch]); //el [] estaba vacía y le di a la primera opción del asistente
     return (
         <div>
             {loading ? (
