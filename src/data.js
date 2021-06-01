@@ -49,7 +49,7 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id:'5  ',
+            _id:'5',
             name:'Puma Slim Pant',
             category:'Pants',
             image:'/images/p5.jpg',
