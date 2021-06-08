@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import Product from '../../components/Product';
+import Product from '../components/Product';
 //import data from '../../data';
-import LoadingBox from '../LoadingBox';
-import MessageBox from '../MessageBox';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../../actions/productActions';
+import { listProducts } from '../actions/productActions';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
