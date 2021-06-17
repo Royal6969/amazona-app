@@ -5,7 +5,7 @@ import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-export default function SigninScreen(props){ //min 5:02:50 no me salen los cuadros de input para escribir el email/password
+export default function SigninScreen(props){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -36,23 +36,23 @@ export default function SigninScreen(props){ //min 5:02:50 no me salen los cuadr
                 { error && <MessageBox variant="danger">{error}</MessageBox>}
                 <div>
                     <label htmlFor="email">Email Address</label>
-                    <imput 
+                    <input 
                         type="email" 
                         id="email" 
                         placeholder="Enter email" 
                         required
                         onChange={(e) => setEmail(e.target.value)}
-                    ></imput>
+                    ></input>
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
-                    <imput 
+                    <input 
                         type="password" 
                         id="password" 
                         placeholder="Enter password" 
                         required
                         onChange={(e) => setPassword(e.target.value)}
-                    ></imput>
+                    ></input>
                 </div>
                 <div>
                     <label />
