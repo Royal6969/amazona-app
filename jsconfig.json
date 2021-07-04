@@ -4,4 +4,3 @@
     },
     "exclude": ["node_modules"]
 }
-//with this, all automatly imports work perfectly
