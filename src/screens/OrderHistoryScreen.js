@@ -59,5 +59,5 @@ export default function OrderHistoryScreen(props) {
             )
             }
         </div>
-    )
+    );
 }
