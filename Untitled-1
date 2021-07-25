@@ -1,1 +1,5 @@
 mongodb+srv://amazona:amazona6969@cluster0.cy9ly.mongodb.net/amazona?retryWrites=true&w=majority
+
+[remote "origin"]
+	url = https://git.heroku.com/sergio-amazona-app.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
