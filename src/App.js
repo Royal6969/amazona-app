@@ -18,6 +18,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import UserListScreen from './screens/UserListScreen';
 
 
 function App() {
@@ -115,6 +116,10 @@ function App() {
                 <AdminRoute 
                     path="/orderlist" 
                     component={OrderListScreen}
+                ></AdminRoute>
+                <AdminRoute
+                    path="/userlist"
+                    component={UserListScreen}
                 ></AdminRoute>
                 <Route path="/" component={HomeScreen} exact></Route>
             </main>
