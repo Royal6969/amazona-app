@@ -16,6 +16,7 @@ export const addToCart = (productId, qty) => async(dispatch, getState) => {
             price: data.price,
             countInStock: data.countInStock,
             product: data._id,
+            seller: data.seller, //the rule of ecommerce, we can only buy to one seller at the same time, the order has to be of individual seller
             qty,
         },
     });
