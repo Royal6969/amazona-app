@@ -42,7 +42,8 @@ export default function OrderListScreen(props) {
           <thead>
             <tr>
               <th>ID</th>
-              {/* <th>USER</th> sacrifico este campo por las siguientes razones de más abajo */}
+              <th>USER</th>
+              {/* error resuelto */}
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
@@ -54,12 +55,14 @@ export default function OrderListScreen(props) {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                {/* <td>{order.seller.name}</td> lo sacrifico por las siguientes razones */}
-                {/* <td>{order.user.name}</td> */}
+                {/* <td>{order.seller.name}</td> */}
+                <td>{order.user.name}</td>
                 {/* en realidad es {order.user.name} pero no sé por qué me dejó de funcionar y he tenido que parchearlo de esta manera... */}
                 {/* pero ahora con esto no se pueden ver los orders a través de la pestaña de Admin... */}
                 {/* asique voy a sacrificar este campo para que no me de más problemas */}
                 {/* TypeError: Cannot read property 'name' of undefined */}
+                {/* error resuelto */}
+                {/* no se podía leer el name porque se trataban de pedidos antiguos cuyos users fueron borrados de la database */}
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>

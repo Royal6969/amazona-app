@@ -13,7 +13,7 @@ export default function HomeScreen() {
 
     useEffect(() => {
         dispatch(listProducts({}));
-    }, [dispatch]); //el [] estaba vacía y le di a la primera opción del asistente
+    }, [dispatch]);
     return (
         <div>
             {loading ? (
