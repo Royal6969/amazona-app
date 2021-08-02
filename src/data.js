@@ -8,13 +8,13 @@ const data = {
             password: bcrypt.hashSync('1234', 8),
             isAdmin: true,
             isSeller: true,
-            seller: { //a teammate of course called fher333 recomend insert here in the Admin the seller fields 
-            name: 'Puma',
-            logo: '/images/logo1.png',
-            description: 'best seller',
-            rating: 4.5,
-            numReviews: 120,
-            },
+            // seller: { //a teammate of course called fher333 recomend insert here in the Admin the seller fields 
+            // name: 'Puma',
+            // logo: '/images/logo1.png',
+            // description: 'best seller',
+            // rating: 4.5,
+            // numReviews: 120,
+            // },
         },
         {
             name:'Royal',
