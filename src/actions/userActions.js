@@ -21,6 +21,9 @@ import {
     USER_DELETE_FAIL,
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
+    USER_TOPSELLERS_LIST_REQUEST,
+    USER_TOPSELLERS_LIST_SUCCESS,
+    USER_TOPSELLERS_LIST_FAIL,
 } 
     from "../constants/userConstants";
 
@@ -142,20 +145,42 @@ export const listUsers = () => async (dispatch, getState) => {
 };
 
 export const deleteUser = (userId) => async (dispatch, getState) => {
-    dispatch({ type: USER_DELETE_REQUEST, payload: userId });
-    const {
-      userSignin: { userInfo },
-    } = getState();
-    try {
-      const { data } = await Axios.delete(`/api/users/${userId}`, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
-      dispatch({ type: USER_DELETE_SUCCESS, payload: data });
-    } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({ type: USER_DELETE_FAIL, payload: message });
-    }
-  };
+  dispatch({ type: USER_DELETE_REQUEST, payload: userId });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.delete(`/api/users/${userId}`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: USER_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_DELETE_FAIL, payload: message });
+  }
+};
+
+export const listTopSellers = () => async (dispatch/*, getState*/) => { //remove getState to make this function simpler
+  dispatch({ type: USER_TOPSELLERS_LIST_REQUEST });
+  try {
+    // const {
+    //   userSignin: { userInfo },
+    // } = getState(); //there's no need user authentication
+    const { data } = await Axios.get('/api/users/top-sellers', /*{
+      // headers: {
+      //   Authorization: `Bearer ${userInfo.token}`,
+      // },
+      // this API has not Authorization because is public and anyone can see it
+    }*/);
+    dispatch({ type: USER_TOPSELLERS_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_TOPSELLERS_LIST_FAIL, payload: message });
+  }
+};
