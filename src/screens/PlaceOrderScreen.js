@@ -14,6 +14,7 @@ export default function PlaceOrderScreen(props) {
     }
     const orderCreate = useSelector(state => state.orderCreate);
     const { loading, success, error, order } = orderCreate;
+    
     const toPrice = (num) => Number(num.toFixed(2)); //5.123 => "5.12" => 5.12
     cart.itemsPrice = toPrice(
         cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
@@ -21,10 +22,12 @@ export default function PlaceOrderScreen(props) {
     cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
     cart.taxPrice = toPrice(0.21 * cart.itemsPrice);
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+    
     const dispatch = useDispatch();
     const placeOrderHandler = () => {
         dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
     };
+    
     useEffect(() => {
         if(success){
             props.history.push(`/order/${order._id}`);

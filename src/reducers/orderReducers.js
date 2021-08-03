@@ -39,7 +39,7 @@ export const orderCreateReducer = (state = {}, action) => {
         default:
             return state;
     }
-}
+};
 
 export const orderDetailsReducer = (state = { loading: true }, action) => {
     switch(action.type) {
