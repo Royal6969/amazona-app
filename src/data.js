@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 const data = {
-    users: [
+    users: [//estos usuarios fueron borrados y creados de nuevo desde la propia web, asique estos datos ya no deberían servir
         {
             name:'Admin',
             email: 'admin@example.com',
