@@ -30,7 +30,7 @@ export default function ProductEditScreen(props) {
     useEffect(() => {
         if(successUpdate) {
             props.history.push('/productlist');
-        } //ver posible error con el campo Category en el ProductRouter
+        }
         if(!product || product._id !== productId || successUpdate) { //esa segunda condición es para que al darle al botón de CreateProduct, los campos estén autorrellenados con los datos de un nuevo sampleProduct en vez de con los datos de un producto ya existente ... pero si la pongo, hace que no me funcione ya el botón de CreateProduct... :(
             dispatch({ type: PRODUCT_UPDATE_RESET });
             dispatch(detailsProducts(productId));
@@ -49,13 +49,14 @@ export default function ProductEditScreen(props) {
         // TODO: dispatch update product
         dispatch(
             updateProduct({ 
-                _id: productId, 
-                name, 
-                price, 
-                image, 
-                countInStock, 
-                brand, 
-                description 
+                _id: productId,
+                name,
+                price,
+                image,
+                category,
+                brand,
+                countInStock,
+                description,
             })
         );
     };
