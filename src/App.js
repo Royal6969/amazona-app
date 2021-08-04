@@ -22,6 +22,8 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SellerRoute from './components/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
+import SearchBox from './components/SearchBox';
+import SearchScreen from './screens/SearchScreen';
 
 
 function App() {
@@ -43,6 +45,14 @@ function App() {
                     <Link className="brand" to="/">
                         Amazona
                     </Link>
+                </div>
+                <div>
+                    {/* we can't use SearchBox here directly because we wouldn't have access to props */}
+                    <Route 
+                        render={({ history }) => (
+                            <SearchBox history={history}></SearchBox> //we have to enclose history in code brackets, bacuse history is a property of react-router-dom object
+                        )} //here we pass react-router-dom properties to the SearchBox using render function
+                    ></Route>
                 </div>
                 <div>
                     <Link to="/cart">
@@ -124,6 +134,7 @@ function App() {
                 <Route path="/placeorder" component={PlaceOrderScreen}></Route>
                 <Route path="/order/:id" component={OrderScreen}></Route>
                 <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+                <Route path="/search/name/:name?" component={SearchScreen} exact></Route>
                 <PrivateRoute 
                     path="/profile" 
                     component={ProfileScreen}
