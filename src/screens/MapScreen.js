@@ -89,6 +89,10 @@ export default function MapScreen(props) {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 }); // se cogen las coordenadas del dispositivo y se pasan a la funcion position en la que se actualizan los datos de center y location
+                setLocation({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
             });
         }
     };

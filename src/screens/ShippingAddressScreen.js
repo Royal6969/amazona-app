@@ -34,7 +34,7 @@ export default function ShippingAddressScreen(props) {
             setLng(addressMap.lng);
         }
         let moveOn = true;
-        if (!newLat || newLng) {
+        if (!newLat || !newLng) {
             moveOn = window.confirm('You did not set your location on map. Continue?');
         }
         if(moveOn) {
@@ -54,14 +54,16 @@ export default function ShippingAddressScreen(props) {
     };
 
     const chooseOnMap = () => {
-        dispatch(saveShippingAddress({
-            fullName,
-            address,
-            city,postalCode,
-            country,
-            lat,
-            lng,
-        }));
+        dispatch(
+            saveShippingAddress({
+                fullName,
+                address,
+                city,postalCode,
+                country,
+                lat,
+                lng,
+            })
+        );
         props.history.push('/map');
     };
 
