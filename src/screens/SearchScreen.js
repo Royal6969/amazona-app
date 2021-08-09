@@ -46,14 +46,14 @@ export default function SearchScreen(props) {
    }, [category, dispatch, max, min, name, order, rating, pageNumber]);
    
    const getFilterUrl = (filter) => {
-   const filterPage = filter.page || pageNumber;
-   const filterCategory = filter.category || category;
-   const filterName = filter.name || name;
-   const filterRating = filter.rating || rating;
-   const sortOrder = filter.order || order;
-   const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
-   const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
-   return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
+      const filterPage = filter.page || pageNumber;
+      const filterCategory = filter.category || category;
+      const filterName = filter.name || name;
+      const filterRating = filter.rating || rating;
+      const sortOrder = filter.order || order;
+      const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
+      const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
+      return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
    };
 
    return (
@@ -162,17 +162,15 @@ export default function SearchScreen(props) {
                         ))} 
                      </div>
                      <div className="row center pagination">
-                        {
-                           [...Array(pages).keys()].map((x) => (
-                              <Link 
-                                 className={x + 1 === page ? 'active' : ''} 
-                                 key={x + 1} 
-                                 to={getFilterUrl({ page: x + 1 })}
-                                 >
-                                    {x + 1}
-                              </Link>
-                           ))
-                        }
+                        {[...Array(pages).keys()].map((x) => (
+                           <Link
+                              className={x + 1 === page ? 'active' : ''}
+                              key={x + 1}
+                              to={getFilterUrl({ page: x + 1 })}
+                           >
+                              {x + 1}
+                           </Link>
+                        ))}
                      </div>
                   </>
                )}

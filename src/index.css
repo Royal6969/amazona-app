@@ -353,7 +353,7 @@ img.large{
   border-left: 0;
 }
 /* Pagination */
-.pagination a{
+.pagination a {
   padding: 1rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
@@ -363,6 +363,6 @@ img.large{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.pagination a.active{
+.pagination a.active {
   font-weight: bold;
 }
