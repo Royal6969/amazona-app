@@ -29,40 +29,42 @@ export default function ShippingAddressScreen(props) {
         e.preventDefault();
         const newLat = addressMap ? addressMap.lat : lat;
         const newLng = addressMap ? addressMap.lng : lng;
-        if(addressMap) {
-            setLat(addressMap.lat);
-            setLng(addressMap.lng);
+        if (addressMap) {
+          setLat(addressMap.lat);
+          setLng(addressMap.lng);
         }
         let moveOn = true;
         if (!newLat || !newLng) {
-            moveOn = window.confirm('You did not set your location on map. Continue?');
+          moveOn = window.confirm(
+            'You did not set your location on map. Continue?'
+          );
         }
-        if(moveOn) {
-            dispatch(
-                saveShippingAddress({ 
-                    fullName, 
-                    address, 
-                    city, 
-                    postalCode, 
-                    country, 
-                    lat: newLat, 
-                    lng: newLng 
-                })
-            );
-            props.history.push('/payment');
+        if (moveOn) {
+          dispatch(
+            saveShippingAddress({
+              fullName,
+              address,
+              city,
+              postalCode,
+              country,
+              lat: newLat,
+              lng: newLng,
+            })
+          );
+          props.history.push('/payment');
         }
-    };
-
-    const chooseOnMap = () => {
+      };
+      const chooseOnMap = () => {
         dispatch(
             saveShippingAddress({
                 fullName,
                 address,
-                city,postalCode,
+                city,
+                postalCode,
                 country,
                 lat,
                 lng,
-            })
+              })
         );
         props.history.push('/map');
     };

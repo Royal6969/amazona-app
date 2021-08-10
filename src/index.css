@@ -330,11 +330,11 @@ img.large{
   font-weight: bold;
 }
 /* Map */
-.full-container{
+.full-container {
   margin: -1rem;
   height: calc(100% + 2rem);
 }
-.map-input-box{
+.map-input-box {
   box-sizing: border-box;
   position: absolute;
   left: 0;
@@ -344,11 +344,11 @@ img.large{
   height: 4rem;
   display: flex;
 }
-.map-input-box input{
+.map-input-box input {
   border-radius: 1rem 0 0 1rem;
   border-right: 0;
 }
-.map-input-box button{
+.map-input-box button {
   border-radius: 0 1rem 1rem 0;
   border-left: 0;
 }
