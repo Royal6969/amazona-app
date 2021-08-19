@@ -1,7 +1,41 @@
+import bcrypt from 'bcryptjs';
+
+// ATT, este data.js con los usuarios tmb, es el que debe estar en el backend
+// y al revés, el data.js que solo contiene los productos debe estar en el frontend (obsoleto)
+
 const data = {
+    users: [//estos usuarios fueron borrados y creados de nuevo desde la propia web, asique estos datos ya no deberían servir
+        {
+            name:'Admin',
+            email: 'admin@example.com',
+            password: bcrypt.hashSync('1234', 8),
+            isAdmin: true,
+            isSeller: true,
+            seller: { //a teammate of course called fher333 recomend insert here in the Admin the seller fields 
+                name: 'admin',
+                logo: '/images/logo1.png',
+                description: 'best seller',
+                rating: 4.5,
+                numReviews: 120,
+            }, //it code appear in video 58 to fix some bugs
+        },
+        {
+            name:'Royal',
+            email:'royal@example.com',
+            password: bcrypt.hashSync('123', 8),
+            isAdmin: false,
+            isSeller : true,
+            seller: { //a teammate of course called fher333 recomend insert here in the Admin the seller fields 
+                name: 'royal',
+                logo: '/images/logo2.png',
+                description: 'best seller',
+                rating: 3.5,
+                numReviews: 100,
+            },
+        },
+    ],
     products:[
         {
-            _id:'1',
             name:'Nike Slim Shirt',
             category:'Shirts',
             image:'/images/p1.jpg',
@@ -13,7 +47,6 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id:'2',
             name:'Adidas Slim Shirt',
             category:'Shirts',
             image:'/images/p2.jpg',
@@ -25,7 +58,6 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id:'3',
             name:'Lacoste Free Shirt',
             category:'Shirts',
             image:'/images/p3.jpg',
@@ -37,7 +69,6 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id:'4',
             name:'Nike Slim Pant',
             category:'Pants',
             image:'/images/p4.jpg',
@@ -49,7 +80,6 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id:'5  ',
             name:'Puma Slim Pant',
             category:'Pants',
             image:'/images/p5.jpg',
@@ -61,7 +91,6 @@ const data = {
             description: 'high quality product',
         },
         {
-            _id:'6',
             name:'Adidas Fit Pants',
             category:'Pants',
             image:'/images/p6.jpg',

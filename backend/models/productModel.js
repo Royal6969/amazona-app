@@ -12,6 +12,17 @@ const ObjectId = Schema.ObjectId;
 //var ObjectIdSchema = Schema.ObjectId;
 //var ObjectId = mongoose.Types.ObjectId;
 
+const reviewSchema = new mongoose.Schema(
+    {
+      name: { type: String, required: true },
+      comment: { type: String, required: true },
+      rating: { type: Number, required: true },
+    },
+    {
+      timestamps: true,
+    }
+  );
+
 const productSchema = new mongoose.Schema(
     //{ _id: String },
     {
@@ -20,6 +31,7 @@ const productSchema = new mongoose.Schema(
         
         _id: { type: String, default: new ObjectId().toHexString }, //mejor solucion parche, sí sale la numeracion secuancial de los primeros productos, y cuando se crea uno nuevo, da un _id hash pero siendo de tipo String no me saldrá del tipo ObjectId
         name: { type: String, required: true, unique: true },
+        seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //a través de Compass puede insertar en los productos el campo de seller: ObjectId("mismo para todos los productos que quiera que sean para este mismo vendedor") //vamos a usar el ref='use' para la función de populate para la seller information de la user table
         image: { type: String, required: true },
         brand: { type: String, required: true },
         category: { type: String, required: true },
@@ -28,6 +40,7 @@ const productSchema = new mongoose.Schema(
         countInStock: { type: Number, required: true },
         rating: { type: Number, required: true },
         numReviews: { type: Number, required: true },
+        reviews: [reviewSchema],
     },
     //{_id: false },
     //{_id: new ObjectId().toHexString }

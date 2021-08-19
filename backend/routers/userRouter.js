@@ -8,6 +8,16 @@ import { generateToken, isAdmin, isAuth } from '../utils.js';
 const userRouter = express.Router();
 
 userRouter.get(
+    '/top-sellers', 
+    expressAsyncHandler(async(req, res) => {
+        const topSellers = await User.find({ isSeller: true })
+            .sort({ 'seller.rating': -1 })
+            .limit(3);
+        res.send(topSellers);
+    })
+);
+
+userRouter.get(
     '/seed', 
     expressAsyncHandler(async (req, res) => {
         await User.remove({});
@@ -27,6 +37,7 @@ userRouter.post(
                     name: user.name,
                     email: user.email,
                     isAdmin: user.isAdmin,
+                    isSeller: user.isSeller,
                     token: generateToken(user),
                 });
                 return;
@@ -50,6 +61,7 @@ userRouter.post(
             name: createdUser.name,
             email: createdUser.email,
             isAdmin: user.isAdmin,
+            isSeller: user.isSeller,
             token: generateToken(createdUser),
         });
     })
@@ -66,22 +78,31 @@ userRouter.get(
         }
     })
 );
-userRouter.put('/profile', isAuth, expressAsyncHandler(async(req, res) => {
-    const user = await User.findById(req.user._id);
-    if(user) {
-        user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
-        if(req.body.password) {
-            user.password = bcrypt.hashSync(req.body.password, 8);
-        }
-        const updateUser = await user.save();
-            res.send({
-                _id: updateUser._id,
-                name: updateUser.name,
-                email: updateUser.email,
-                isAdmin: updateUser.isAdmin,
-                token: generateToken(updateUser),
-            });
+userRouter.put(
+    '/profile', 
+    isAuth, 
+    expressAsyncHandler(async(req, res) => {
+        const user = await User.findById(req.user._id);
+        if(user) {
+            user.name = req.body.name || user.name;
+            user.email = req.body.email || user.email;
+            if(user.isSeller) {
+                user.seller.name = req.body.sellerName || user.seller.name;
+                user.seller.logo = req.body.sellerLogo || user.seller.logo;
+                user.seller.description = req.body.sellerDescription || user.seller.description;
+            }
+            if(req.body.password) {
+                user.password = bcrypt.hashSync(req.body.password, 8);
+            }
+            const updateUser = await user.save();
+                res.send({
+                    _id: updateUser._id,
+                    name: updateUser.name,
+                    email: updateUser.email,
+                    isAdmin: updateUser.isAdmin,
+                    isSeller: user.isSeller,
+                    token: generateToken(updateUser),
+                });
         }
     })
 );
@@ -93,6 +114,49 @@ userRouter.get(
     expressAsyncHandler(async(req, res) => {
         const users = await User.find({});
         res.send(users);
+    })
+);
+
+userRouter.delete(
+    '/:id',
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+      const user = await User.findById(req.params.id);
+      if (user) {
+        if (user.email === 'admin@example.com') {
+          res.status(400).send({ message: 'Can Not Delete Admin User' });
+          return;
+        }
+        const deleteUser = await user.remove();
+        res.send({ message: 'User Deleted', user: deleteUser });
+      } else {
+        res.status(404).send({ message: 'User Not Found' });
+      }
+    })
+);
+
+userRouter.put(
+    '/:id',
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+      const user = await User.findById(req.params.id);
+      if (user) {
+        user.name = req.body.name || user.name; 
+        //there should be another type of evaluation. req.body.name can return a false value causing that the router will always save the previous state value. Remove the or condition and you will be able to change IsAdmin and IsSeller value from true to false.
+        user.email = req.body.email || user.email;
+        // user.isSeller = req.body.isSeller || user.isSeller; //el profesor Basir lo hizo así originalmente
+        // user.isAdmin = req.body.isAdmin || user.isAdmin; //el profesor Basir lo hizo así originalmente
+        // user.isSeller = req.body.isSeller === user.isSeller ? user.isSeller : req.body.isSeller; //así es como lo ha visto mejor un compañero del curso
+        // user.isAdmin = req.body.isAdmin === user.isAdmin ? user.isAdmin : req.body.isAdmin; //así es como lo ha visto mejor un compañero del curso
+        user.isSeller = Boolean(req.body.isSeller); // finalmente en el video 58 de arreglar algunos errores, Basir deja esto así
+        user.isAdmin = Boolean(req.body.isAdmin); // finalmente en el video 58 de arreglar algunos errores, Basir deja esto así
+      const updatedUser = await user.save();
+      res.send({ message: 'User Updated', user: updatedUser });
+      } else {
+      res.status(404).send({ message: 'User Not Found' });
+      }
     })
 );
 
