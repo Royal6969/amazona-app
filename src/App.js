@@ -29,6 +29,8 @@ import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import MapScreen from './screens/MapScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import SupportScreen from './screens/SupportScreen';
+import ChatBox from './components/ChatBox';
 
 function App() {
 
@@ -137,6 +139,9 @@ return (
                             <li>
                                 <Link to="/userlist">Users</Link>
                             </li>
+                            <li>
+                                <Link to="/support">Support</Link>
+                            </li>
                             </ul>
                         </div>
                     )}
@@ -225,6 +230,10 @@ return (
                     path="/dashboard"
                     component={DashboardScreen}
                 ></AdminRoute>
+                <AdminRoute
+                    path="/support"
+                    component={SupportScreen}
+                ></AdminRoute>
                 <SellerRoute 
                     path="/productlist/seller" 
                     component={ProductListScreen}
@@ -236,7 +245,11 @@ return (
                 <Route path="/" component={HomeScreen} exact></Route>
             </main>
 
-            <footer className="row center">All right reserved</footer>
+            <footer className="row center">
+                {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+                <div>All right reserved</div>{' '}
+            </footer>
+
         </div>
     </BrowserRouter>
   );
